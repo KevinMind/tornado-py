@@ -6,7 +6,6 @@ import tornado.httpserver
 import tornado.ioloop
 
 import json
-import websocket
 
 PORT = int(os.environ.get('PORT', '8080'))
 
