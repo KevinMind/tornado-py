@@ -14,7 +14,7 @@ import hashlib
 import base64
 from Crypto.Hash import SHA256 as sha256
 
-from amazon_keys import AWS_ACCESS_KEY_ID, AWS_ASSOCIATE_TAG, AWS_SECRET_ACCESS_KEY
+from settings import AWS_ACCESS_KEY_ID, AWS_ASSOCIATE_TAG, AWS_SECRET_ACCESS_KEY
 
 key = AWS_ACCESS_KEY_ID
 secret = AWS_SECRET_ACCESS_KEY

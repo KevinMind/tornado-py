@@ -1,10 +1,9 @@
 import pymongo
 from pymongo import MongoClient
 
-from services.mongo_keys import DB
-
-url = DB
+from settings import mongo_url
+mongo_url = mongo_url
 
 def connect():
-    client = pymongo.MongoClient(url)
+    client = pymongo.MongoClient(mongo_url)
     db = client.test

@@ -25,13 +25,6 @@ ENV = Environment(
 # set default port for server env
 PORT = int(os.environ.get('PORT', '8902'))
 
-from services.postgres_keys import DB
-db_url = DB
-
-DATABASE_URL = os.environ.get(
-  'DATABASE_URL',
-  db_url
-)
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):

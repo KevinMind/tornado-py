@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# scp secure.com:/path/keys/* services/
+

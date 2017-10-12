@@ -4,6 +4,13 @@ import json
 import services.py_scraper
 scraper = services.py_scraper
 
+from settings import meaning_cloud_key
+KEY = meaning_cloud_key
+
+print(KEY)
+
+
+
 
 ##############################################################################
 # Takes input service and defines host url for api call                      #
@@ -76,10 +83,9 @@ def get_payload(**kwargs):
     payload = {}
 
     # ALWAYS REQUIRED
-    from services.meaning_cloud_keys import KEY
-    key = KEY
+    payload['key'] = KEY
 
-    payload['key'] = key
+    print(KEY)
 
     if service == "topics":
         payload['model'] = get_model(model)
