@@ -2,4 +2,5 @@ services/amazon_keys.py
 services/mongo_keys.py
 services/meaning_cloud_keys.py
 services/postgres_keys.py
+services/pstgres_keys.py
 services/cookie_secret.py
