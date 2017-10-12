@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Index {{self.title}}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+<!-- Left Side of View -->
+<div class="section">
+  <div class="container">
+    <form action="/cloud-meaning" method="post">
+      <input type="url" name="url" value="" placeholder="type in a url...">
+      <div class="input-field col s12">
+        <select name="service">
+          <option value="" disabled selected>Analysis Type</option>
+          <option value="summarize">Summarize</option>
+          <option value="topics">Topics</option>
+          <option value="sentiment">Sentiment</option>
+        </select>
+        <label>Materialize Select</label>
+      </div>
+      <button class="waves-effect waves-light btn btn" type="submit">Send Message</button>
+    </form>
+
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <h5>{{url}}</h5>
+    </div>
+    <div class="row pt-5">
+      {{data|safe}}
+    </div>
+  </div>
+</div>
+{% endblock %}

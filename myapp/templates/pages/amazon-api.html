@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Index {{self.title}}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+<!-- Left Side of View -->
+<div class="section">
+  <div class="container">
+    <form action="/amazon-api" method="post">
+      <input type="text" name="keywords" value="" placeholder="enter some search terms">
+      <button class="waves-effect waves-light btn btn" type="submit">Search Amazon</button>
+    </form>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <h3>{{keywords}}</h3>
+    </div>
+    <div>
+      <!-- <div class="preloader-wrapper big active">
+       <div class="spinner-layer spinner-blue-only">
+         <div class="circle-clipper left">
+           <div class="circle"></div>
+         </div><div class="gap-patch">
+           <div class="circle"></div>
+         </div><div class="circle-clipper right">
+           <div class="circle"></div>
+         </div>
+       </div>
+     </div> -->
+      <table class="responsive-table highlight">
+        <tbody>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+          </tr>
+          {% for item in items %}
+          <tr>
+              <td><img src="{{item.image}}" alt="" width="50px" height="auto"></td>
+              <td>
+                <div class="">
+                  <a href="{{item.url}}">{{item.title | truncate(length=50, killwords=False, end='...')}}</a>
+                </div>
+                <div class="">
+                  <span>{{item.asin}}</span><span>Dimensions: {{item.height}}</span>
+                </div>
+              </td>
+              <td>{{item.brand}}</td>
+              <td><span>{{item.currency}}</span><span> {{item.price}}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

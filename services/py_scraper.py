@@ -30,6 +30,22 @@ def make_soup(url):
     soup = BeautifulSoup(clean_html, 'lxml')
     return soup
 
+def return_text(url):
+    return make_soup(url).get_text()
+
+def count_sentences(url):
+    soup = make_soup(url)
+    soup = soup.body.get_text()
+    # count of sentences by marking
+    sentences = 0
+    # possible punctuations
+    punct = [".", "?", "!", "..."]
+    # what can follow a punctuation ex: empty space, or a quote mark.
+    punct_suffix = [" ", '"', "'"]
+    for x in punct:
+        for y in punct_suffix:
+            sentences += soup.count(x + y)
+    return sentences
 
 def validate_url(url):
     if "www" in url:
@@ -53,7 +69,7 @@ def get_ingredients(url):
     response = urllib.request.urlopen(request)
     return response
 
-def py_scrape(url):
+def scrape(url):
     # make soup
     soup = make_soup(url)
     # trim fat

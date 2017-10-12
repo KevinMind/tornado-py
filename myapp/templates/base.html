@@ -5,6 +5,7 @@
       {% block head %}
       <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
       <link rel="stylesheet" href="static/styles/style.min.css" />
 
       <title>{% block title %}{% endblock %} - My Webpage</title>
@@ -16,7 +17,7 @@
 
     {% include 'components/navbar.html' %}
 
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div>{% block content %}{% endblock %}</div>
 
     {% include 'components/footer.html' %}
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

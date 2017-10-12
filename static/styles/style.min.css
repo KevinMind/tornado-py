@@ -4,13 +4,6 @@ h1 {
 .text-center {
   text-align: center; }
 
-.header {
-  background-size: cover;
-  width: 100%;
-  background-image: url("https://lh3.googleusercontent.com/-H6PacdskbPehw_P3NQvLvIix3PK3gNC82AZXhpFhYm5PVY26CqyHieUp_jifhmYY-FrcezAVQ=w640-h400-e365");
-  min-height: 400px;
-  display: flex; }
-
 .overlay {
   padding: 10vh;
   display: flex;
@@ -6981,3 +6974,49 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   stroke-width: 4;
   stroke-linecap: round;
   /*shape-rendering: crispEdges;*/ }
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+nav ul a,
+nav .brand-logo {
+  color: #444; }
+
+p {
+  line-height: 2rem; }
+
+.button-collapse {
+  color: #26a69a; }
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255, 255, 255, 0.9); }
+
+.parallax-container .section {
+  width: 100%; }
+
+@media only screen and (max-width: 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%; }
+  #index-banner .section {
+    top: 10%; } }
+
+@media only screen and (max-width: 600px) {
+  #index-banner .section {
+    top: 0; } }
+
+.icon-block {
+  padding: 0 15px; }
+
+.icon-block .material-icons {
+  font-size: inherit; }
+
+footer.page-footer {
+  margin: 0; }

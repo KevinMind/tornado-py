@@ -3,6 +3,19 @@ $(".button-collapse").sideNav();
 // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 //$('.collapsible').collapsible();
 
+$(document).ready(function() {
+  $('select').material_select();
+  $('.parallax').parallax();
+
+  $('#message-box').pushpin({
+      top: 500,
+      bottom: 5000,
+      offset: 0
+    });
+});
+
+
+
 console.log("is gulp working?")
 
 
@@ -71,20 +84,6 @@ closeBtn.onclick = function(e) {
   };
 }
 
-var urlForm = document.getElementById("urlForm");
-var urlInput = document.getElementById("urlInput");
 
-urlForm.onsubmit = function(e) {
-
-  // e.preventDefault();
-  //define message field value
-  var url = urlInput.value;
-  // Send the message through the WebSocket.
-
-  var redirect = "/py-scraper?url=" + url
-
-  window.location.replace(redirect)
-  return false;
-};
 
 module.exports = tornadoPy;

@@ -13,6 +13,10 @@ import tornado.auth
 from jinja2 import \
     Environment, PackageLoader, select_autoescape
 
+# For rendering json data
+from markupsafe import Markup
+import json
+
 # needed for database queries
 import pymongo
 from pymongo import MongoClient
@@ -23,6 +27,12 @@ from pymongo import MongoClient
 
 import services.py_scraper
 py_scraper = services.py_scraper
+
+import services.natural_language
+language = services.natural_language
+
+import services.bottle_nose_example
+amazon = services.bottle_nose_example
 
 import services.messanger_pygeon
 messanger_pygeon = services.messanger_pygeon
@@ -97,20 +107,58 @@ class MessagingHandler(TemplateHandler):
         self.set_header(
           'Cache-Control',
           'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("messaging.html", {'messages': messages})
+        self.render_template("pages/messaging.html", {'messages': messages})
 
 class PyScraperHandler(TemplateHandler):
     def get(self):
         # get url parameter
-        url = "https://www.vice.com/en_us/article/a3kpv4/i-waited-for-mcdonalds-szechuan-sauce-and-it-was-fine"
-        url = self.get_argument("url")
+        url = self.get_argument("url", "https://www.vice.com/en_us/article/a3kpv4/i-waited-for-mcdonalds-szechuan-sauce-and-it-was-fine")
         # scrape url and pass to template
-        words = py_scraper.py_scrape(url)
+        words = py_scraper.scrape(url)
 
         self.set_header(
           'Cache-Control',
           'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("py-scraper.html", {'words': words, 'url': url})
+        self.render_template("pages/py-scraper.html", {'words': words, 'url': url})
+    def post(self):
+        url = self.get_body_argument('url', None)
+        params = "?url={}".format(url)
+        self.redirect("/py-scraper" + params)
+
+class FindMeaningHandler(TemplateHandler):
+    def get(self):
+        # get url parameter
+        url = self.get_argument("url", "https://www.vice.com/en_us/article/a3kpv4/i-waited-for-mcdonalds-szechuan-sauce-and-it-was-fine")
+        service = self.get_argument('service', "topics")
+
+        # scrape url and pass to template
+        data = language.find_meaning(model="english", url=url, service=service)
+
+        self.set_header(
+          'Cache-Control',
+          'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("pages/cloud_meaning.html", {'data': Markup(json.dumps(data)), 'url': url})
+    def post(self):
+        url = self.get_body_argument('url', None)
+        service = self.get_body_argument('service', None)
+        params = "?url={}&service={}".format(url, service)
+        self.redirect("/cloud-meaning" + params)
+
+class AmazonHandler(TemplateHandler):
+    def get(self):
+        keywords = "baseballs"
+        keywords = self.get_argument('keywords', None)
+        items = amazon.item_search(keywords)
+        print(items)
+        self.set_header(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("pages/amazon-api.html", {"items": items, "keywords": keywords})
+    def post(self):
+        keywords = self.get_body_argument("keywords")
+        self.redirect("http://localhost:8902/amazon-api?keywords=" + keywords)
+
+
 
 settings = {
     "debug": True,
@@ -129,6 +177,8 @@ class make_app(tornado.web.Application):
             (r"/messaging", MessagingHandler),
             (r"/websocket", WebSocketHandler),
             (r"/delete", WebSocketHandler),
+            (r"/amazon-api", AmazonHandler),
+            (r"/cloud-meaning", FindMeaningHandler),
             # (r"/(styles\.css)", tornado.web.StaticFileHandler,
             #  dict(path=settings['static_path'])),
             (r"/py-scraper", PyScraperHandler),

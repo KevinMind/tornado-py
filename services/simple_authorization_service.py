@@ -25,9 +25,12 @@ ENV = Environment(
 # set default port for server env
 PORT = int(os.environ.get('PORT', '8902'))
 
+from services.postgres_keys import DB
+db_url = DB
+
 DATABASE_URL = os.environ.get(
   'DATABASE_URL',
-  'postgres://postgres:e6aef3b4b5685d1ad42a72f5c641853f@dokku-postgres-crmdb:5432/crmdb'
+  db_url
 )
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -62,10 +65,13 @@ class LoginHandler(BaseHandler):
         self.redirect("/")
 
 
+from services.cookie_secret import SECRET
+secret = SECRET
+
 settings = {
     "debug": True,
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
-    "cookie_secret": "sdflk2j3f23f2lk2jf30ijsdflkjff0j998h98h",
+    "cookie_secret": secret,
     "login_url": "/login",
 }
 

@@ -14,15 +14,20 @@ import hashlib
 import base64
 from Crypto.Hash import SHA256 as sha256
 
+from amazon_keys import AWS_ACCESS_KEY_ID, AWS_ASSOCIATE_TAG, AWS_SECRET_ACCESS_KEY
+
+key = AWS_ACCESS_KEY_ID
+secret = AWS_SECRET_ACCESS_KEY
+tag = AWS_ASSOCIATE_TAG
+
 ###################################
 # 1. Define Constants and audibles#
 ###################################
 
 service = "AWSECommerceService"
-AWS_ACCESS_KEY_ID= "AKIAIJIKZZ7QKYQ56KEQ"
-AWS_SECRET_KEY= "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"
-ASSOCIATE_TAG = "4dconsulting-20"
-AWS_SECRET_KEY= "1234567890"
+AWS_ACCESS_KEY_ID= key
+AWS_SECRET_KEY= secret
+ASSOCIATE_TAG = tag
 operation = "ItemSearch"
 brand = "Coleman"
 # MY VERSION response = "Images%2CItemAttributes%2COffers"

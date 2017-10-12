@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Index {{self.title}}{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<!-- Left Side of View -->
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center white-text text-lighten-2">Real-Time Messaging with Python</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Asynchronous with less JS</h5>
+      </div>
+      <div class="row center">
+        <a href="#messages" class="btn-large waves-effect waves-light light-blue lighten-1">Go to Messages</a>
+      </div>
+    </div>
+  </div>
+  <div class="parallax"><img src="https://i.pinimg.com/originals/70/83/06/708306705cd40fd344ef0083273e73fa.jpg" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="section" id="messages">
+  <div class="container-fluid">
+    <div class="row pt-5">
+      <div class="col s12 m5">
+        <div id="message-box" class="card message-box z-depth-5">
+          <div class="card-content">
+            <form id="form" action="#" method="post">
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">mode_edit</i>
+                  <label class="active"for="message">Add A Message</label>
+                  <input id="message" autofocus>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 m4">
+                  <button class="waves-effect waves-light btn btn light-blue" type="submit">Send Message</button>
+                </div>
+                <div class="col s12 m4">
+                  <button class="waves-effect waves-light btn-flat" type="button" id="close">Close Connection</button>
+                </div>
+                <div class="col s12 m4">
+                  <a href="/delete" class="waves-effect waves-light btn-flat" type="button" id="close">Clear Messages</a>
+                </div>
+              </div>
+              <div class="section">
+              </div>
+            </form>
+            <div class="status" id="status">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m7">
+        <table class="bordered">
+          <tbody id="messages">
+            {% for message in messages %}
+          <tr><td width="30%">message</td><td width="70%">{{message.message}}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
